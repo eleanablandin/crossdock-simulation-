@@ -54,7 +54,7 @@ class ItemBase:
             "id": self.id,
             "type": self.type,
             "barcode_valid": self.barcode_valid,
-            "label_dameged": self.label_damaged,
+            "label_damaged": self.label_damaged,
             "destination": self.destination
         }
     
