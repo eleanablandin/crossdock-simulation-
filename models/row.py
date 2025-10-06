@@ -21,14 +21,3 @@ class Row:
         if self.is_valid():
             return self.items[0].type
         return "Invalid"
-
-
-row1 = Row(1, [Pallet("1-01"), Pallet("1-02")])  # 2 pallets
-row2 = Row(2, [Car("2-01"), Car("2-02"), Car("2-03")])  # 3 cars
-
-# Creamos fila inválida (mezclada)
-row3 = Row(3, [Pallet("3-01"), Car("3-02")])
-
-print("Row1:", row1.row_type(), "Valida?", row1.is_valid(), "Straps:", row1.strap_needed)
-print("Row2:", row2.row_type(), "Valida?", row2.is_valid(), "Straps:", row2.strap_needed)
-print("Row3:", row3.row_type(), "Valida?", row3.is_valid(), "Straps:", row3.strap_needed)
