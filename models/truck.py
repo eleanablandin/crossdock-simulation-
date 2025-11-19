@@ -24,15 +24,31 @@ class Truck:
         return row_index <= self.strap_reach_limit
     
     def straps_required(self) -> int:
-        return sum(r.strap_needed for r in self.valid_rows())
+
+        """
+        Required straps = number of valid rows.
+        Valid rows are rows of:
+          - 2 pallets
+          - 3 cars
+       """
+        # return sum(1 for r in self.rows if r.is_valid())
+        return sum(row.required_straps() for row in self.rows)
     
-    def straps_spplied(self) -> int:
+    def straps_applied(self) -> int:
+
+        """
+        Returns the number of straps applied across all rows.
+        A strap is applied only if:
+         - the row is valid (2 pallets or 3 cars)
+         - the row is reachable by strap (self.is_row_reachable)
+        """
+
         applied = 0 
 
         for i, row in enumerate(self.rows, start=1):
             if row.is_valid() and self.is_row_reachable(i):
                 applied += 1
-            return applied
+        return applied
     
     def rows_status(self) -> List[Dict[str, Any]]:
 
@@ -66,7 +82,7 @@ class Truck:
         total = self.total_rows()
         valid = len(self.valid_rows())
         required = self.straps_required()
-        applied = self.straps_spplied()
+        applied = self.straps_applied()
         unreachable = max(0, required - applied)
 
         return {
